@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lotto_wrapper</title>
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        /* tab1 css */
+        /* tab1 css */
+        /* tab1 css */
+
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        }
+
+        .mwd_lotto_wrap .header_tab_menu ul {
+            display: flex;
+            text-align: center;
+        }
+
+        .mwd_lotto_wrap .header_tab_menu ul.border {
+            border-bottom: 1px solid #eee;
+
+        }
+
+        .mwd_lotto_wrap .header_tab_menu ul li {
+            width: calc(100% / 3);
+            padding: 13px 0;
+            font-size: 16px;
+            font-weight: 700;
+            color: #939393;
+        }
+
+        .mwd_lotto_wrap .header_tab_menu ul li.tab_action {
+            color: #C00;
+            border-bottom: #C00 2px solid;
+        }
+
+        .mwd_lotto_wrap .main_top_info {
+            text-align: center;
+        }
+
+        .mwd_lotto_wrap .main_top_info .y_font {
+            color: #FFCD4B;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .mwd_lotto_wrap .main_top_info .tit_text {
+            color: #FFF;
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 44px;
+            letter-spacing: -1.8px;
+            margin-bottom: 40px;
+        }
+
+        .mwd_lotto_wrap .tiket_box {
+            text-align: center;
+        }
+
+        .mwd_lotto_wrap .tiket_box img {
+            width: 85%;
+            transform: translate(15px, 10px);
+        }
+
+        .mwd_lotto_wrap .tiket_box p {
+            width: 85%;
+            border: 1px solid #D9D9D9;
+            border-radius: 20px;
+            margin: 0 auto;
+            padding: 15px 25px;
+            line-height: 22px;
+            margin-bottom: 50px;
+        }
+
+        .mwd_lotto_wrap .events {
+            width: 90%;
+            padding: 40px 0;
+            margin: 0 auto;
+            border-top: 2px solid #525252;
+            border-bottom: 2px solid #525252;
+        }
+
+        .mwd_lotto_wrap .events p {
+            text-transform: capitalize;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .mwd_lotto_wrap .events img {
+            margin-bottom: 15px;
+        }
+
+        .mwd_lotto_wrap .events img:last-of-type {
+            margin: unset;
+        }
+
+        .mwd_lotto_wrap .notice {
+            width: 90%;
+            padding: 40px 0;
+            margin: 0 auto;
+            color: #fff;
+        }
+
+        .mwd_lotto_wrap .notice p {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .mwd_lotto_wrap .notice ul {
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+        }
+
+        .mwd_lotto_wrap .notice ul li {
+            padding-left: 8px;
+            text-indent: -8px;
+        }
+
+        .mwd_lotto_wrap .footer_btn {
+            color: #fff;
+            width: 90%;
+            background-color: #AE2731;
+            padding: 15px 0;
+            text-align: center;
+            margin: 0 auto;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* tab1 css end */
+        /* tab1 css end */
+        /* tab1 css end */
+
+
+        /* tab2 css */
+        /* tab2 css */
+        /* tab2 css */
+
+
+        .mwd_lotto_wrap .innerRound {
+            /* display: none; */
+            height: 100px;
+            border-top: 1px solid #E3E3E3;
+            border-bottom: 1px solid #E3E3E3;
+        }
+
+        .mwd_lotto_wrap .lottoRound {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .mwd_lotto_wrap .lottoRound .text_box {
+            display: flex;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        .lotto_container .lottoRound .text_box {
+            gap: 8px;
+            align-items: center;
+        }
+
+        .lotto_container .lottoRound .text_box span {
+            background: #ddd;
+            color: #fff;
+            border-radius: 15px;
+            padding: 5px 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .lotto_container .lottoRound .text_box p:nth-of-type(1) {
+            font-size: 18px;
+            font-weight: 800;
+            color: #2d2d2d;
+        }
+
+        .mwd_lotto_wrap .top_text_box {
+            background-color: #FAFAFA;
+            display: flex;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 18px;
+            gap: 30px;
+        }
+
+        .mwd_lotto_wrap .top_text_box p:nth-of-type(1) {
+            position: relative;
+        }
+
+        .mwd_lotto_wrap .top_text_box p:nth-of-type(1)::after {
+            content: "";
+            width: 1px;
+            height: 100%;
+            background-color: #E3E3E3;
+            position: absolute;
+            right: -15px;
+            top: 0;
+        }
+
+        .main_text_box .date_lotto {
+            /* padding: 20px; */
+            height: 100px;
+        }
+
+        .mwd_lotto_wrap .main_text_box .date_lotto .win_num {
+            display: flex;
+            gap: 40px;
+        }
+
+        .mwd_lotto_wrap .top_text_box2 {
+            background-color: #FAFAFA;
+        }
+
+        .mwd_lotto_wrap .win_num2 {
+            margin-top: 10px;
+            gap: 5px;
+        }
+
+        .mwd_lotto_wrap .win_num2 li {
+            width: 34px;
+            aspect-ratio: 1;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mwd_lotto_wrap .innerRound2 {
+            display: none;
+        }
+
+        .mwd_lotto_wrap .slideDown_btn {
+            transition: 0.3s;
+        }
+
+        .mwd_lotto_wrap .top_text_box2 p:nth-of-type(1) {
+            position: relative;
+        }
+
+        .mwd_lotto_wrap .top_text_box2 p:nth-of-type(1)::after {
+            content: "";
+            background-color: #ddd;
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            right: -15px;
+            top: 0;
+        }
+
+        .mwd_lotto_wrap .date_lotto2 p {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .mwd_lotto_wrap .date_lotto2 p span {
+            margin-left: 10px;
+            color: #727272;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* tab2 css end */
+        /* tab2 css end */
+        /* tab2 css end */
+
+        html,
+        body {
+            position: relative;
+            height: 100%;
+        }
+
+        body {
+            /* background: #eee; */
+            margin: 0;
+            padding: 0;
+        }
+
+        .swiper {
+            width: 100%;
+            /* height: 365px; */
+            padding: 30px 0;
+        }
+
+        .swiper-slide {
+            padding: 30px 20px;
+            font-size: 18px;
+            background: #fff;
+            border-radius: 10px;
+            box-sizing: border-box;
+            width: 330px;
+            height: 470px;
+            box-shadow: 9px 9px 22px -4px rgba(0, 0, 0, 0.29);
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #tab3 {
+            height: 100vh;
+        }
+
+        .win_num2 li {
+            font-size: 15px;
+            width: 35px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+            background-color: #ddd;
+            color: #fff;
+        }
+
+        .gray {
+            background: radial-gradient(50% 50% at 50% 50%, #BCBCBC 0%, #747474 100%);
+        }
+
+        .yellow {
+            background: radial-gradient(50% 50% at 50% 50%, #FFE978 0%, #FFC806 100%);
+        }
+
+        .orange {
+            background: radial-gradient(50% 50% at 50% 50%, #FFC46B 0%, #FF7A00 100%);
+        }
+
+        .purple {
+            background: radial-gradient(50% 50% at 50% 50%, #D698EC 0%, #A745C9 100%);
+        }
+
+        .green {
+            background: radial-gradient(50% 50% at 50% 50%, #97BE8D 0%, #33934E 100%);
+        }
+
+        .blue {
+            background: radial-gradient(50% 50% at 50% 50%, #8CA5FF 0%, #4364DA 100%);
+        }
+
+        .date_data_text {
+            font-size: 12px;
+            gap: 30px;
+            text-wrap: nowrap;
+            margin: 10px 0;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .date_data_text p:nth-of-type(1)::after {
+            content: "";
+            background-color: #ddd;
+            width: 1px;
+            height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-12px);
+        }
+
+        .present_wrap ul {
+            font-size: 12px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .present_wrap ul li {
+            width: calc(100% / 3);
+            height: 50px;
+            line-height: 50px;
+            border-top: 1px solid #eee;
+            border-right: 1px solid #eee;
+        }
+
+        .present_wrap ul li:nth-of-type(1) {
+            border-left: 1px solid #eee;
+        }
+
+        .present_wrap ul:last-child li {
+            border-bottom: 1px solid #eee;
+        }
+
+        .present_wrap ul:first-child {
+            background-color: #eee;
+            border-radius: 10px 10px 0 0;
+            font-size: 14px;
+            color: #6a6a6a;
+            font-weight: 600;
+        }
+
+        .present_wrap ul:first-child li:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        .present_wrap ul:first-child li:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+        .present_wrap ul:last-child li:first-child {
+            border-radius: 0 0 0 10px;
+        }
+
+        .present_wrap ul:last-child li:last-child {
+            border-radius: 0 0 10px 0;
+        }
+
+        .lotto_win_wrapper .date_lotto2 .win_num2 {
+            margin: 10px 0;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <div class="mwd_lotto_wrap">
+        <div class="header_tab_menu" style="background-color: #fff;">
+            <ul>
+                <li class="tab1 tab_action">딜팡복권</li>
+                <li class="tab2">복권내역</li>
+                <li class="tab3">당첨번호</li>
+            </ul>
+        </div>
+
+        <div class="lotto_container">
+
+            <div class="tab_content" id="tab1"
+                style="background: url(./images/mwd_lotto_bg.png) no-repeat 50% / cover; padding: 50px 0;">
+                <div class="main_top_info" style="color: #fff;">
+                    <p class="y_font">딜팡 회원만을 위한 혜택</p>
+                    <p class="tit_text">딜팡복권 당첨 시<br>1등 000만원 적립금 지급!</p>
+                </div>
+                <div class="tiket_box" style="color: #fff;">
+                    <img src="./images/tiket.png" alt="티켓이미지">
+                    <p>회원가입, 출석체크 , 찜, 상품 구매할 때마다 딜팡복권 증정!</p>
+                </div>
+
+
+                <div class="events" style="color: #fff;">
+                    <p>events</p>
+                    <img src="./images/eventBanner1.png" alt="출첵하고 딜팡복권 받기">
+                    <img src="./images/eventBanner2.png" alt="상품구매하고 딜팡복권 받기">
+                    <img src="./images/eventBanner3.png" alt="친구초대하고 딜팡복권 받기">
+                </div>
+
+
+                <div class="notice">
+                    <p>유의사항</p>
+                    <ul>
+                        <li>· 딜팡복권은 로또 당첨번호와 일치하면 리워드를 지급하는 서비스입니다.</li>
+                        <li>· 복권 번호는 랜덤으로 지급됩니다.</li>
+                        <li>· 복권 발행은 매주 토요일 오후 7시 59분까지로 8시 이후 발행된 복권은 다음 회차 번호로 적용됩니다.</li>
+                        <li>· 딜팡복권은 다양한 미션을 통해 지급 받을 수 있습니다.</li>
+                    </ul>
+                </div>
+
+                <p class="footer_btn">딜팡복권 받기</p>
+
+            </div>
+
+            <div class="tab_content" id="tab2">
+
+                <div class="lottoRoundWrapper">
+
+                    <div class="lottoRound" style="border-bottom: 1px solid #e3e3e3;">
+                        <div class="text_box">
+                            <p>1088회차</p>
+                            <span>D-3</span>
+                        </div>
+                        <svg class="slideDown_btn" xmlns="http://www.w3.org/2000/svg" width="18" height="10"
+                            viewBox="0 0 18 10" fill="none">
+                            <path d="M17 0.999999L10.4141 8.34907C9.63637 9.21698 8.36365 9.21698 7.58587 8.34907L1 1"
+                                stroke="#2D2D2D" stroke-width="2" stroke-miterlimit="10" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </div>
+
+                    <div class="innerRound2" style="border-bottom: 1px solid #ddd;">
+                        <div class="top_text_box2"
+                            style="display: flex; padding: 20px; font-size: 12px; font-weight: 600; gap: 30px;">
+                            <p>추첨일 2023.10.07</p>
+                            <p>지급기한 2023.10.13</p>
+                        </div>
+                        <div class="main_text_box2">
+                            <div class="date_lotto2" style="padding: 20px;">
+                                <p>발행일자<span>2023.10.04 13:00:00</span></p>
+                                <ul class="win_num2" style="display: flex;">
+                                    <li class="blue">42</li>
+                                    <li class="green">32</li>
+                                    <li class="purple">27</li>
+                                    <li class="orange">16</li>
+                                    <li class="yellow">4</li>
+                                    <li class="blue">42</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab_content" id="tab3">
+                <!-- Swiper -->
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <p style="font-size: 18px; font-weight: 800; color: #2d2d2d; text-align: left;">1088회차 당첨번호
+                            </p>
+                            <ul class="win_num2" style="display: flex;">
+                                <li class="blue">45</li>
+                                <li class="green">30</li>
+                                <li class="purple">25</li>
+                                <li class="orange">13</li>
+                                <li class="yellow">5</li>
+                                <li class="yellow">4</li>
+                                <li style="background: unset; color: #606060; font-weight: 700; font-size: 18px;">+</li>
+                                <li class="purple">25</li>
+                            </ul>
+                            <div class="date_data_text" style="display: flex;">
+                                <p>추첨일<span>2023.10.07</span></p>
+                                <p>지급기한<span>2023.10.13</span></p>
+                            </div>
+                            <div class="present_wrap">
+                                <ul style="display: flex;" class="th">
+                                    <li>순위</li>
+                                    <li>당첨금(상품)</li>
+                                    <li>당첨인원</li>
+                                </ul>
+                                <ul style="display: flex;">
+                                    <li>1등</li>
+                                    <li>5,000,000원</li>
+                                    <li>0명</li>
+                                </ul>
+                                <ul style="display: flex;">
+                                    <li>2등</li>
+                                    <li>100,000원</li>
+                                    <li>0명</li>
+                                </ul>
+                                <ul style="display: flex;">
+                                    <li>3등</li>
+                                    <li>5,000,000원</li>
+                                    <li>19명</li>
+                                </ul>
+                                <ul style="display: flex;">
+                                    <li>4등</li>
+                                    <li>100원</li>
+                                    <li>733명</li>
+                                </ul>
+                                <ul style="display: flex;">
+                                    <li>5등</li>
+                                    <li>30원</li>
+                                    <li>12161명</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+                    </div>
+                </div>
+
+                <div class="lotto_notice" style="width: 85%; margin: 0 auto;">
+                    <p style="font-size: 18px; font-weight: 800; margin-bottom: 10px;">당첨금 지급안내</p>
+                    <ul style="font-size: 14px; font-weight: 600; line-height: 22px; ">
+                        <li>1등 : 모든 숫자 일치(6개)</li>
+                        <li>2등 : 숫자 5개 + 보너스 숫자 일치</li>
+                        <li>3등 : 당첨번호 5개 일치</li>
+                        <li>4등 : 당첨번호 4개 일치</li>
+                        <li>5등 : 당첨번호 3개 일치</li>
+                    </ul>
+                </div>
+
+                <!-- Swiper JS -->
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+                <!-- Initialize Swiper -->
+                <script>
+                    var swiper = new Swiper(".mySwiper", {
+                        slidesPerView: 1.2,
+                        spaceBetween: 20,
+                        centeredSlides: true,
+                    });
+                </script>
+            </div>
+
+            <script>
+
+                // tab1 script
+                // tab1 script
+                // tab1 script
+
+                $(document).ready(function () {
+                    $('.mwd_lotto_wrap .header_tab_menu ul li').click(function () {
+                        $(this).addClass('tab_action')
+                        $(this).siblings().removeClass('tab_action')
+                    })
+
+                    $('.tab_content').hide();
+                    $('#tab1').show();
+
+                    $('.header_tab_menu ul .tab1').click(function () {
+                        $('#tab1').show()
+                        $('#tab1').siblings().hide();
+                        $('.header_tab_menu ul').removeClass('border')
+                    })
+                    $('.header_tab_menu ul .tab2').click(function () {
+                        $('#tab2').show()
+                        $('#tab2').siblings().hide();
+                        $('.header_tab_menu ul').addClass('border')
+
+                    })
+                    $('.header_tab_menu ul .tab3').click(function () {
+                        $('#tab3').show()
+                        $('#tab3').siblings().hide();
+                        $('.header_tab_menu ul').addClass('border')
+
+                    })
+                })
+
+                // tab1 script end
+                // tab1 script end
+                // tab1 script end
+
+                // tab2 script
+                // tab2 script
+                // tab2 script
+
+                $(document).ready(function () {
+
+                    $('.slideDown_btn').click(function () {
+                        $('.innerRound2').slideToggle();
+                        $('.slideDown_btn').toggleClass('rotate')
+                    })
+                });
+
+                // tab2 script end
+                // tab2 script end
+                // tab2 script end 
+
+                $(document).ready(function () {
+
+                    let winNumber = $('.win_num2 li').text();
+                    winNumber = Number(winNumber) + 1 - 1;
+                    console.log(typeof (winNumber))
+                    console.log(winNumber)
+
+                    if (winNumber >= 1 && winNumber <= 10) {
+                        $('.win_num2 li').addClass('yellow')
+                    }
+                    else if (winNumber >= 11 && winNumber <= 20) {
+                        $('.win_num2 li').addClass('orange')
+                    }
+                    else if (winNumber >= 21 && winNumber <= 30) {
+                        $('.win_num2 li').addClass('green')
+                    }
+                    else if (winNumber >= 31 && winNumber <= 40) {
+                        $('.win_num2 li').addClass('purple')
+                    }
+                    else if (winNumber >= 41 && winNumber <= 45) {
+                        $('.win_num2 li').addClass('blue')
+                    }
+
+                })
+
+
+
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css">
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>calendar</title>
+
+    <style>
+        body {
+            font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+        }
+
+        #mwd_attend_calendar .dates {
+            /* display: grid; */
+            /* grid-template-columns: repeat(7, 1fr); */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            width: 325px;
+            margin: 0 auto;
+            color: #898989;
+            font-size: 16px;
+        }
+
+        #mwd_attend_calendar .colToday {
+            color: #D40000;
+            border: 2px solid #D40000;
+            font-size: 12px;
+            position: relative;
+            display: grid;
+            place-content: center;
+            font-weight: 500;
+        }
+
+        #mwd_attend_calendar .colToday p {
+            width: 85%;
+            aspect-ratio: 1;
+            border: 1px solid #D40000;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #mwd_attend_calendar .dates li {
+            background-color: #F0F0F0;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            aspect-ratio: 1;
+            line-height: 40px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #mwd_attend_calendar .sunday {
+            color: #D40000;
+        }
+
+        #mwd_attend_calendar .cal_header .month li {
+            justify-content: center;
+            align-items: center;
+        }
+
+        #mwd_attend_calendar .cal_header .month {
+            gap: 10px;
+        }
+
+        #mwd_attend_calendar .cal_header .month li svg {
+            vertical-align: middle;
+        }
+
+        #mwd_attend_calendar .cal_header ul {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 33px;
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: 2D2D2D;
+        }
+
+        #mwd_attend_calendar .cal_header ul.week {
+            color: #525252;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        #mwd_attend_calendar .attendDays {
+            width: 90%;
+            background-color: #F0F0F0;
+            margin: 30px auto 20px;
+            padding: 19px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        #mwd_attend_calendar .attendDays span {
+            font-weight: 700;
+        }
+
+        #mwd_attend_calendar .attendCheck_btn {
+            width: 90%;
+            background-color: #AE2731;
+            color: #fff;
+            margin: 0 auto;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var today = new Date();
+            var date = new Date();
+
+            $(".prev_btn").click(function () { // 이전달
+                $("#mwd_attend_calendar > .dates > li").remove();
+                // $("#calendar > tbody > tr").remove();
+                today = new Date(today.getFullYear(), today.getMonth() - 1, today.getDate());
+                buildCalendar();
+            })
+
+            $(".next_icon").click(function () { //다음달
+                $("#mwd_attend_calendar > .dates > li").remove();
+                // $("#calendar > tbody > tr").remove();
+                today = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+                buildCalendar();
+            })
+
+
+            function buildCalendar() {
+
+                nowYear = today.getFullYear();
+                nowMonth = today.getMonth();
+                firstDate = new Date(nowYear, nowMonth, 1).getDate();
+                firstDay = new Date(nowYear, nowMonth, 1).getDay(); //1st의 요일
+                lastDate = new Date(nowYear, nowMonth + 1, 0).getDate();
+
+                if ((nowYear % 4 === 0 && nowYear % 100 !== 0) || nowYear % 400 === 0) { //윤년 적용
+                    lastDate[1] = 29;
+                }
+
+                $(".year_mon").text(nowYear + " - " + (nowMonth + 1));
+
+                for (i = 0; i < firstDay; i++) { //첫번째 줄 빈칸
+                    $("#mwd_attend_calendar .dates").append("<li></li>");
+                }
+                for (i = 1; i <= lastDate; i++) { // 날짜 채우기
+                    plusDate = new Date(nowYear, nowMonth, i).getDay();
+                    if (plusDate == 0) {
+                        // $("#calendar .dates li").append("<li></li>");
+                    }
+                    $("#mwd_attend_calendar .dates").append("<li class='date'>" + i + "</li>");
+                }
+                if ($("#mwd_attend_calendar > .dates > li").length % 7 != 0) { //마지막 줄 빈칸
+                    for (i = 1; i <= $("#mwd_attend_calendar > .dates > li").length % 7; i++) {
+                        $("#mwd_attend_calendar .dates").append("<li></li>");
+                    }
+                }
+                $(".date").each(function (index) { // 오늘 날짜 표시
+                    if (nowYear == date.getFullYear() && nowMonth == date.getMonth() && $(".date").eq(index).text() == date.getDate()) {
+                        $(".date").eq(index).addClass('colToday');
+                        $(".colToday").text('출석');
+                        $(".colToday").append('<p />');
+                    }
+                })
+
+
+                let datesArray = $('.dates li').eq(0);
+                // console.log(datesArray);
+
+                for (let i = 0; i < 31; i += 7) {
+                    // console.log(i)
+
+                    let datesArray = $('.dates li').eq(i);
+                    // console.log(datesArray); 
+
+                    $(datesArray).addClass('sunday');
+                }
+            }
+            buildCalendar();
+
+            // 이미지 랜덤 노출
+            const imgArr = ['lotto_blue.png', 'lotto_gray.png', 'lotto_green.png', 'lotto_orange.png', 'lotto_purple.png', 'lotto_yellow.png'];
+
+            const randomBall = balls[Math.floor(Math.random() * balls.length)];
+        })
+    </script>
+
+</head>
+
+<body>
+    <div id="mwd_attend_calendar">
+        <div class="cal_header">
+            <ul class="month" style="display: flex;">
+                <li class="prev_btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                        <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                    </svg>
+                </li>
+                <li class="year_mon"></li>
+                <li class="next_icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                        <path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" />
+                    </svg>
+                </li>
+            </ul>
+            <ul class="week" style="display: flex;">
+                <li style="color: #D40000;">일</li>
+                <li>월</li>
+                <li>화</li>
+                <li>수</li>
+                <li>목</li>
+                <li>금</li>
+                <li>토</li>
+            </ul>
+        </div>
+        <ul class="dates">
+        </ul>
+
+        <p class="attendDays">10월의 출석횟수 <span>0 일</span></p>
+
+        <p class="attendCheck_btn">출석체크</p>
+    </div>
+</body>
+
+</html>
